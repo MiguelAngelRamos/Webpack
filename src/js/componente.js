@@ -5,4 +5,5 @@ export const hello = (name) => {
 
   // para renderizarlo
   document.body.append(h1);
+  // segundo cambio
 }
