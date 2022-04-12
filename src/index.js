@@ -1,6 +1,6 @@
 import { hello } from './js/componente.js';
-
-const name = "Miguel";
+import './styles.css';
+const name = "Miguel Angel";
 hello(name);
 
 
