@@ -9,7 +9,9 @@ const Terser = require('terser-webpack-plugin');
 module.exports = {
   mode: 'production',
   output: {
-    clean: true
+    clean: true,
+    filename: 'main.[contenthash].js' // para que el archivo js tambien hash
+
   },
   module: {
     // Vamos a definir las reglas
@@ -34,6 +36,16 @@ module.exports = {
         // sin importar donde este la imagen webpack la va reconocer
         test: /\.(png|jpe?g|gif)$/,
         loader: 'file-loader',
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
     ]
   },
@@ -52,7 +64,7 @@ module.exports = {
       template: './src/index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css', // main.css
+      filename: '[name].[fullhash].css', // main.css
       ignoreOrder: false //
     }),
     new CopyPlugin({
